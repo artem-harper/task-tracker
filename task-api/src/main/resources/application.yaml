@@ -3,7 +3,7 @@ server:
 
 jwt:
   secret: 77d26d45-b221-4555-908b-3e7b6fda166ba13SQQ-W
-  lifetime: 10m
+  lifetime: 30m
 
 spring:
   datasource:

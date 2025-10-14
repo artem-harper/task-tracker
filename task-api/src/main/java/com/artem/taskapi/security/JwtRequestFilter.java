@@ -1,5 +1,6 @@
 package com.artem.taskapi.security;
 
+import com.artem.taskapi.service.UserServiceImpl;
 import com.artem.taskapi.util.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -23,6 +25,7 @@ import java.util.Collections;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final JwtTokenUtil jwtTokenUtil;
+    private final UserServiceImpl userService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -42,8 +45,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
+            UserDetailsImpl userDetails = (UserDetailsImpl) userService.loadUserByUsername(username);
+
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                    username, null, Collections.emptyList());
+                    userDetails, null, Collections.emptyList());
 
             SecurityContextHolder.getContext().setAuthentication(token);
         }

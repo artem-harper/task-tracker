@@ -21,6 +21,8 @@ public class Task {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private TaskStatus status;
 
     private LocalDateTime done_at;

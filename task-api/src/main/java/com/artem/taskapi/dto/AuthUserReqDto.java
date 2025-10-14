@@ -1,10 +1,9 @@
 package com.artem.taskapi.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+
+@Builder
 @Setter
 @Getter
 @NoArgsConstructor

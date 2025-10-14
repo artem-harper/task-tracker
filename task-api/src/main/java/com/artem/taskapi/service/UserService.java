@@ -2,6 +2,7 @@ package com.artem.taskapi.service;
 
 import com.artem.taskapi.dto.AuthUserReqDto;
 import com.artem.taskapi.dto.AuthUserRespDto;
+import com.artem.taskapi.dto.UserDto;
 import com.artem.taskapi.entity.User;
 import com.artem.taskapi.exception.EmailAlreadyExistException;
 import com.artem.taskapi.repository.UserRepository;
@@ -36,5 +37,10 @@ public class UserService {
         authUserRespDto.setToken(jwtTokenUtil.generateToken(new UserDetailsImpl(user)));
 
         return authUserRespDto;
+    }
+
+    public UserDto findById(Long id){
+
+        return modelMapper.map(userRepository.findById(id), UserDto.class);
     }
 }

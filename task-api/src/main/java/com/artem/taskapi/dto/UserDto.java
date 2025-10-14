@@ -1,18 +1,19 @@
 package com.artem.taskapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthUserRespDto {
+public class UserDto {
 
     private Long id;
+
     private String email;
 
-    @JsonIgnore
-    private String token;
+    private List<CreateTaskDto> createTaskDtoList;
 }

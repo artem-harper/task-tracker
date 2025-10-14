@@ -3,7 +3,9 @@ package com.artem.taskapi.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
+import java.util.List;
+
+@ToString(exclude = "list")
 @Setter
 @Getter
 @AllArgsConstructor
