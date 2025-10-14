@@ -1,6 +1,7 @@
 package com.artem.taskapi.config;
 
 import com.artem.taskapi.security.CustomAuthenticationEntryPoint;
+import com.artem.taskapi.security.JwtRequestFilter;
 import com.artem.taskapi.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ public class SecurityConfig {
 
     private final UserServiceImpl userService;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -34,13 +37,14 @@ public class SecurityConfig {
         return http.
                 authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/user").permitAll()
-                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/auth/login").permitAll()
                                 .anyRequest().authenticated())
                 .userDetailsService(userService)
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.NEVER))
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(customAuthenticationEntryPoint))
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(CorsConfigurer::disable)
                 .csrf(CsrfConfigurer::disable)
                 .build();

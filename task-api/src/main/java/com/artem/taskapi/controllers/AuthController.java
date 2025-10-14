@@ -1,6 +1,7 @@
 package com.artem.taskapi.controllers;
 
 import com.artem.taskapi.dto.AuthUserReqDto;
+import com.artem.taskapi.dto.AuthUserRespDto;
 import com.artem.taskapi.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody AuthUserReqDto authUserReqDto){
-        authService.loginUser(authUserReqDto);
-        return null;
+    public ResponseEntity<AuthUserRespDto> loginUser(@RequestBody AuthUserReqDto authUserReqDto) {
+
+        AuthUserRespDto authUserRespDto = authService.loginUser(authUserReqDto);
+
+        return ResponseEntity.ok()
+                .header("Authorization ", authUserRespDto.getToken())
+                .body(authUserRespDto);
     }
 }

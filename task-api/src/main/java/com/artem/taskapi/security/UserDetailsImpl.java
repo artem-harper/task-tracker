@@ -1,18 +1,20 @@
 package com.artem.taskapi.security;
 
 import com.artem.taskapi.entity.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-
+@Getter
 public class UserDetailsImpl implements UserDetails {
 
     private User user;
 
     public UserDetailsImpl(User user) {
+        this.user = user;
     }
 
     @Override

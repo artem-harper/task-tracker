@@ -21,11 +21,10 @@ public class UserController {
     @PostMapping
     public ResponseEntity<AuthUserRespDto> registerUser(@RequestBody AuthUserReqDto authUserReqDto) {
 
-
         AuthUserRespDto authUserRespDto = userService.registerUser(authUserReqDto);
 
         return ResponseEntity.ok()
-                .header("token", authUserRespDto.getToken())
+                .header("JwtToken", authUserRespDto.getToken())
                 .body(authUserRespDto);
     }
 }

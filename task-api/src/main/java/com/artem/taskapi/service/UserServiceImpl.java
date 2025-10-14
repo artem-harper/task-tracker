@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserDetailsService {
 
         Optional<User> maybeUser = userRepository.findByEmail(email);
 
-        if (maybeUser.isPresent()){
+        if (maybeUser.isEmpty()){
             throw new UserNotExistException();
         }
 

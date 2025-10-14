@@ -12,7 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthUserRespDto {
 
+    private Long id;
     private String email;
+
     @JsonIgnore
     private String token;
 }
