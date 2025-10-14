@@ -2,6 +2,7 @@ package com.artem.taskapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @ToString
 @Setter
@@ -9,15 +10,22 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "tasks")
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    private String title;
 
-    private String password;
+    private String description;
+
+    private TaskStatus status;
+
+    private LocalDateTime done_at;
+
+    @ManyToOne
+    private User owner;
 
 }
