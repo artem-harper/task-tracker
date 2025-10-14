@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/tasks
+    username: postgres
+    password: pass
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+    url: jdbc:postgresql://localhost:5433/tasks
+    user: postgres
+    password: pass
+    enabled: true
+    default-schema: public
+
+
+
+
+
