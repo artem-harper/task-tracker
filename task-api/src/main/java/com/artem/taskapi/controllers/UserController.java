@@ -1,8 +1,10 @@
 package com.artem.taskapi.controllers;
 
-import com.artem.taskapi.dto.AuthUserDto;
+import com.artem.taskapi.dto.AuthUserReqDto;
+import com.artem.taskapi.dto.AuthUserRespDto;
 import com.artem.taskapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +19,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<AuthUserDto> registerUser(@RequestBody AuthUserDto authUserDto) {
+    public ResponseEntity<AuthUserRespDto> registerUser(@RequestBody AuthUserReqDto authUserReqDto) {
 
-        return ResponseEntity.ok(userService.registerUser(authUserDto));
+
+        AuthUserRespDto authUserRespDto = userService.registerUser(authUserReqDto);
+
+        return ResponseEntity.ok()
+                .header("token", authUserRespDto.getToken())
+                .body(authUserRespDto);
     }
 }
