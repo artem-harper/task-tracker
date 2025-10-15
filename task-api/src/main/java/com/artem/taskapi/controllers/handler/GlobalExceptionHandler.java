@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -25,6 +26,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorMessage> handleUserNotExistException(UserNotExistException ex){
         log.warn("Error message: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiErrorMessage(ex.getMessage()));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiErrorMessage> nonValidArgumentHandle(MethodArgumentNotValidException ex){
+        log.info("INVALID ARGUMENTS");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiErrorMessage(ex.getMessage()));
     }
 
     @ExceptionHandler(AuthenticationException.class)

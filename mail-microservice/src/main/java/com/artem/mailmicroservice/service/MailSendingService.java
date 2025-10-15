@@ -29,9 +29,9 @@ public class MailSendingService {
 
             helper.setFrom(fromEmail);
             helper.setTo(toEmail);
-            helper.setSubject(toEmail + " вы зарегистрированы");
+            helper.setSubject("Уведомление об регистрации");
 
-            helper.setText("Добро пожаловать в наш сервис! Вы успешно зарегистрированы.", false);
+            helper.setText("Вы успешно зарегистрированы в сервисе Task Tracker", false);
 
             mailSender.send(mimeMessage);
 

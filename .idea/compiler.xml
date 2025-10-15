@@ -19,7 +19,7 @@
         </processorPath>
         <module name="core" />
       </profile>
-      <profile name="Annotation profile for mail-microservice" enabled="true">
+      <profile name="Annotation profile for task-api" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

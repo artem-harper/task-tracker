@@ -3,7 +3,9 @@ package com.artem.taskapi.controllers;
 import com.artem.taskapi.dto.AuthUserReqDto;
 import com.artem.taskapi.dto.AuthUserRespDto;
 import com.artem.taskapi.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +20,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthUserRespDto> loginUser(@RequestBody AuthUserReqDto authUserReqDto) {
+    public ResponseEntity<AuthUserRespDto> loginUser(@RequestBody @Valid AuthUserReqDto authUserReqDto) {
 
         AuthUserRespDto authUserRespDto = authService.loginUser(authUserReqDto);
 
