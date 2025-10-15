@@ -3,10 +3,10 @@ server:
 
 spring:
   mail:
-    host: ${SPRING_MAIL_HOST}
-    port: ${SPRING_MAIL_PORT}
-    username: ${SPRING_MAIL_USERNAME}
-    password: ${SPRING_MAIL_PASSWORD}
+    host: smtp.yandex.ru
+    port: 587
+    username: qwezz0@yandex.ru
+    password: hopjfsjueznglckr
     default-encoding: UTF-8
     properties:
       mail:
@@ -16,18 +16,19 @@ spring:
             enable: true
             required: true
           ssl:
-            trust: ${SPRING_MAIL_HOST}
+            trust: smtp.yandex.ru
           connectiontimeout: 10000
           timeout: 10000
           writetimeout: 10000
   kafka:
     consumer:
-      bootstrap-servers: ${SPRING_KAFKA_CONSUMER_BOOTSTRAP_SERVERS}
+      bootstrap-servers: localhost:9092
       key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID}
+
+      group-id: EMAIL_SENDING_TASKS
       properties:
         spring:
           json:
             trusted:
-              packages: ${SPRING_KAFKA_CONSUMER_PROPERTIES_SPRING_JSON_TRUSTED_PACKAGES}
+              packages: com.artem.core

@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/mail-microservice/pom.xml" />
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/../ProductNotifier/core/pom.xml" />
+        <option value="$PROJECT_DIR$/scheduler-microservice/pom.xml" />
       </list>
     </option>
   </component>
