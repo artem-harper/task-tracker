@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,7 +79,7 @@ public class TaskService {
         Task task = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
 
         task.setStatus(TaskStatus.DONE);
-
+        task.setDone_at(LocalDateTime.now());
         Task savedTask = taskRepository.save(task);
 
         return modelMapper.map(savedTask, RespTaskDto.class);
