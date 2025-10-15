@@ -8,11 +8,11 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @KafkaListener(
-        topics = "EMAIL_SENDING_TASKS"
+        topics = "REGISTERED_USERS"
 )
 @RequiredArgsConstructor
 @Component
-public class MessageHandler {
+public class UserRegistredHandler {
 
     private final MailSendingService mailSendingService;
 

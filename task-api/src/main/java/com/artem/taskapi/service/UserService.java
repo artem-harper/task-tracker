@@ -17,8 +17,6 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @Transactional
@@ -54,7 +52,7 @@ public class UserService {
     public void sendMessageToTopic(Long id, String email, String password) throws ExecutionException, InterruptedException {
         UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(email, password);
 
-        SendResult<Long, UserRegisteredEvent> result = kafkaTemplate.send("EMAIL_SENDING_TASKS", id, userRegisteredEvent).get();
+        SendResult<Long, UserRegisteredEvent> result = kafkaTemplate.send("REGISTERED_USERS", id, userRegisteredEvent).get();
 
         log.info("topic: {}", result.getRecordMetadata().topic());
         log.info("partition: {}", result.getRecordMetadata().partition());

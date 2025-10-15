@@ -28,6 +28,7 @@ public class Task {
     private LocalDateTime done_at;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private User owner;
 
 }
