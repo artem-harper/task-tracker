@@ -1,6 +1,7 @@
 package com.artem.taskapi.controllers.handler;
 
 import com.artem.taskapi.exception.EmailAlreadyExistException;
+import com.artem.taskapi.exception.TaskNotFoundException;
 import com.artem.taskapi.exception.UserNotExistException;
 import com.artem.taskapi.util.ApiErrorMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiErrorMessage(ex.getMessage()));
     }
 
+    @ExceptionHandler(TaskNotFoundException.class)
+    public ResponseEntity<ApiErrorMessage> handleUserNotExistException(TaskNotFoundException ex){
+        log.warn("Error message: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiErrorMessage(ex.getMessage()));
+    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorMessage> handleUserNotExistException(Exception ex){
         log.warn("Error message: {}", ex.getMessage());
