@@ -1,1 +1,41 @@
-spring.application.name=mail-microservice
+server:
+  port: 8081
+
+logging:
+  level:
+    org.springframework.mail: DEBUG
+    com.sun.mail: DEBUG
+    org.springframework: DEBUG
+
+
+spring:
+  mail:
+    host: smtp.yandex.ru
+    port: 587
+    username: qwezz0@yandex.ru
+    password: hopjfsjueznglckr
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.yandex.ru
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      group-id: EMAIL_SENDING_TASKS
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.artem.core
