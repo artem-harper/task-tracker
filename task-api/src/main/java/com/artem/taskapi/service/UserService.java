@@ -10,6 +10,7 @@ import com.artem.taskapi.security.UserDetailsImpl;
 import com.artem.taskapi.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final JwtTokenUtil jwtTokenUtil;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final KafkaTemplate<Long, UserRegis>
 
     public AuthUserRespDto registerUser(AuthUserReqDto authUserReqDto) {
 
